@@ -22,7 +22,7 @@ if(isset($_POST["cat_id"]) && !empty($_POST["cat_id"])){
         $title = $input_title;
     }
     
-    // Validate description description
+    // Validate description 
     $input_description = trim($_POST["description"]);
     if(empty($input_description)){
         $description_err = "Please enter an description.";     
@@ -49,7 +49,7 @@ if(isset($_POST["cat_id"]) && !empty($_POST["cat_id"])){
     // Check input errors before inserting in database
     if(empty($title_err) && empty($description_err) && empty($content_err) && empty($slug)){
         // Prepare an update statement
-        $sql = "UPDATE employees SET title=?, description=?, content=?,slug=? WHERE cat_id=?";
+        $sql = "UPDATE categories SET title=?, description=?, content=?,slug=? WHERE cat_id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -85,7 +85,7 @@ if(isset($_POST["cat_id"]) && !empty($_POST["cat_id"])){
         $cat_id =  trim($_GET["cat_id"]);
         
         // Prepare a select statement
-        $sql = "SELECT * FROM employees WHERE cat_id = ?";
+        $sql = "SELECT * FROM categories WHERE cat_id = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_cat_id);

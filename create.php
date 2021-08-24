@@ -51,30 +51,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before inserting in database
     if(empty($title_err) && empty($description_err) && empty($context_err) && empty($slug)){
         // Prepare an insert statement
-        $sql = "INSERT INTO categories (title, description, content,slug) VALUES (?, ?, ?,?)";
+        $sql = "INSERT INTO categories (title, description, content,slug) VALUES ('".$title."', '".$description."', '".$content."','".$slug."')";
          
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_title, $param_description, $param_content, $param_slug);
+        $link->query($sql);
+        // if($stmt = mysqli_prepare($link, $sql)){
+
+        //     $param_title = $title;
+        //     $param_description = $description;
+        //     $param_content = $content;
+        //     $param_slug =$slug;
+        //     // Bind variables to the prepared statement as parameters
+        //     mysqli_stmt_bind_param($stmt, $param_title, $param_description, $param_content, $param_slug);
             
-            // Set parameters
-            $param_title = $title;
-            $param_description = $description;
-            $param_content = $content;
-            $param_slug =$slug;
+        //     // Set parameters
             
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
-                header("location: index.php");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
+            
+        //     // Attempt to execute the prepared statement
+        //     if(mysqli_stmt_execute($stmt)){
+        //         // Records created successfully. Redirect to landing page
+        //         header("location: index.php");
+        //         exit();
+        //     } else{
+        //         echo "Oops! Something went wrong. Please try again later.";
+        //     }
+        // }
          
         // Close statement
-        mysqli_stmt_close($stmt);
+        // mysqli_stmt_close($stmt);
     }
     
     // Close connection

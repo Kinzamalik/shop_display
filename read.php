@@ -41,7 +41,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     }
      
     // Close statement
-    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($mysqli_stmt);
     
     // Close connection
     mysqli_close($link);
